@@ -83,10 +83,10 @@ def get_pop_csvs(start,end):
 
         for bvid in bvidList:
             info = get_videos_info(bvid)
-            tag_url = 'https://api.bilibili.com/x/web-interface/view/detail/tag?aid={}&cid={}'.format(
-                info["aid"], info["cid"]
-            )
-            taglist += get_videos_tag(tag_url)
+            # tag_url = 'https://api.bilibili.com/x/web-interface/view/detail/tag?aid={}&cid={}'.format(
+            #     info["aid"], info["cid"]
+            # )
+        #     taglist += get_videos_tag(tag_url)
 
             data_dict1 = {
                 '视频bvid': info.get('bvid', "None"),
@@ -108,10 +108,10 @@ def get_pop_csvs(start,end):
 
 
 #get_pop_csvs(1,188)
-
-for i in range(1,188):
-    get_week_popular_list(i)
-    print("week:{}".format(i))
+get_pop_csvs(54,188)
+# for i in range(1,188):
+#
+#     print("week:{}".format(i))
 
 
 

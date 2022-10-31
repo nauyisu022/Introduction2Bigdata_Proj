@@ -55,7 +55,7 @@ def word_count(words):
     items.sort(key=lambda x: x[1], reverse=True)  # 根据词语出现的次数进行从大到小排序
     return counts
 
-for week in range(1,90):
+for week in range(1,2):
     csv_list = glob.glob('data/danmaku/Week{}/*.csv'.format(week))
     words=[]
     for csv_file_path in csv_list:

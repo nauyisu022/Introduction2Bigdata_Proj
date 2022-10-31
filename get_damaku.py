@@ -8,7 +8,7 @@ from bilibili_api.exceptions import ResponseCodeException, DanmakuClosedExceptio
 def get_danmaku(bvid):
         v = video.Video(bvid)
         print(bvid)
-        time.sleep(2.8)
+        time.sleep(1.8)
         try:
             dms = sync(v.get_danmakus(0))
         # 敏感视频，关闭弹幕功能
@@ -33,7 +33,7 @@ def save_danmaku(week,bvid,dms):
 
 
 def get_all_video(dosth,savesth):
-    for week in range(101,151):
+    for week in range(151,188):
         bvlist = []
         with open('bvlist/bvlist_week{}.json'.format(week), mode="r") as f:
             bvlist = json.loads(f.read())
