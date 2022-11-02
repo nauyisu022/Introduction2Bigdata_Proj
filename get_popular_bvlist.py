@@ -17,7 +17,7 @@ def get_week_popular_list(week):
     bvidlist = []
     url = 'https://api.bilibili.com/x/web-interface/popular/series/one?number={}'.format(week)
     req = requests.get(url, headers=HEADERS, timeout=0.5).json()
-    time.sleep(0.1)
+    time.sleep(0.3)
     list = req['data']['list']
     for item in list:
         bvidlist.append(bilibili_api.aid2bvid(item['aid']))
@@ -66,7 +66,6 @@ def get_pop_csvs(start,end):
     taglist = []
     for i in range(start, end):
         bvidList = get_week_popular_list(i)
-
         file_path = ("data/week_popular_{}.csv".format(i))
         # 判断路径是否存在
         if not os.path.exists("data/"):
@@ -77,11 +76,13 @@ def get_pop_csvs(start,end):
                                      fieldnames=[
                                          '视频bvid', '视频aid', 'videos', '视频分类', '版权所有',
                                          '视频封面', '视频标题', '上传时间', '公开时间', '视频描述',
-                                         '播放量', '点赞量']
+                                         '播放量', '点赞量','投币量','收藏量']
                                      )
         csv_writer1.writeheader()
 
         for bvid in bvidList:
+            time.sleep(2.5)
+
             info = get_videos_info(bvid)
             # tag_url = 'https://api.bilibili.com/x/web-interface/view/detail/tag?aid={}&cid={}'.format(
             #     info["aid"], info["cid"]
@@ -100,15 +101,21 @@ def get_pop_csvs(start,end):
                 '公开时间': info.get('pubdate', "None"),
                 '视频描述': info.get('desc', "None"),
                 '播放量': info.get('stat', "None").get('view', "None"),
-                '点赞量': info.get('stat', "None").get('like', "None")
+                '点赞量': info.get('stat', "None").get('like', "None"),
+                '投币量': info.get('stat', "None").get('coin', "None"),
+                '收藏量': info.get('stat', "None").get('favorite', "None")
             }
             csv_writer1.writerow(data_dict1)
         f.close()
+        print(i)
     taglist2csv(taglist, '{}-{}'.format(start,end))
 
 
 #get_pop_csvs(1,188)
-get_pop_csvs(54,188)
+
+get_pop_csvs(93,101)
+
+
 # for i in range(1,188):
 #
 #     print("week:{}".format(i))
