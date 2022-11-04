@@ -84,10 +84,14 @@ def get_pop_csvs(start,end):
             time.sleep(2.5)
 
             info = get_videos_info(bvid)
-            # tag_url = 'https://api.bilibili.com/x/web-interface/view/detail/tag?aid={}&cid={}'.format(
-            #     info["aid"], info["cid"]
-            # )
-        #     taglist += get_videos_tag(tag_url)
+
+
+
+            tag_url = 'https://api.bilibili.com/x/web-interface/view/detail/tag?aid={}&cid={}'.format(
+                info["aid"], info["cid"]
+            )
+            taglist += get_videos_tag(tag_url)
+
 
             data_dict1 = {
                 '视频bvid': info.get('bvid', "None"),
